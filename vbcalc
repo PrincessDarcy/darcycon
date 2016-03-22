@@ -1,0 +1,27 @@
+Public Class Form1
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtFirst.Text = ""
+        txtResult.Text = ""
+        txtSecond.Text = ""
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        txtResult.Text = (Int(txtFirst.Text)) + (Int(txtSecond.Text))
+    End Sub
+
+    Private Sub btnMul_Click(sender As Object, e As EventArgs) Handles btnMul.Click
+        txtResult.Text = txtFirst.Text * txtSecond.Text
+    End Sub
+
+    Private Sub btnSub_Click(sender As Object, e As EventArgs) Handles btnSub.Click
+        txtResult.Text = txtFirst.Text - txtSecond.Text
+    End Sub
+
+    Private Sub btnDiv_Click(sender As Object, e As EventArgs) Handles btnDiv.Click
+        txtResult.Text = txtFirst.Text / txtSecond.Text
+    End Sub
+
+    Private Sub btnMod_Click(sender As Object, e As EventArgs) Handles btnMod.Click
+        txtResult.Text = txtFirst.Text Mod txtSecond.Text
+    End Sub
+End Class
