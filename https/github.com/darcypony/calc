@@ -1,0 +1,152 @@
+/**
+ * Program Name: GUICalculatorV1.java
+ * Purpose: shows how to get data from a JTextField and write numeric data
+ *          back to the JTextField.
+ * Coder: Bill Pulling for Sec02
+ * Date: Mar 18, 2016 
+ */
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GUICalculatorV1 extends JFrame
+{
+	private static final long serialVersionUID = 1L;
+
+	//CLASS WIDE SCOPE AREA
+	JButton addBtn, subtractBtn, multiplyBtn, divideBtn, modBtn, clearBtn;
+	
+	JTextField firstValueTxt, secondValueTxt, resultTxt;
+	
+	//constructor
+	GUICalculatorV1()
+	{
+		super("Basic GUI Calculator App Version 1");
+		//boilerplate
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout() );
+		this.setSize(500, 225);
+		this.setLocationRelativeTo(null);//centres frame on screen
+		
+		//build the JPanels
+		JPanel topPnl = new JPanel();
+		topPnl.setLayout(new GridLayout(3,2,30,30) );
+		topPnl.setBackground(new Color(128,128,128));
+		//add it to the frame
+		this.add(topPnl, BorderLayout.CENTER);
+		
+		JPanel btmPnl = new JPanel();
+		btmPnl.setLayout(new FlowLayout() );
+		btmPnl.setBackground(new Color(175,35,100));
+		this.add(btmPnl, BorderLayout.SOUTH);
+		
+		//create JButtons and add to btmPnl
+		
+	  addBtn = new JButton("+");
+		subtractBtn = new JButton("-");
+		multiplyBtn = new JButton("*");
+		divideBtn = new JButton("/");
+		modBtn = new JButton("%");
+		clearBtn = new JButton("Clear");
+		
+		//add them to the btmPnl
+		btmPnl.add(addBtn);
+		btmPnl.add(subtractBtn);
+		btmPnl.add(multiplyBtn);
+		btmPnl.add(divideBtn);
+		btmPnl.add(modBtn);
+		btmPnl.add(clearBtn);
+		
+		//JLabels and JTextFields
+		JLabel lbl1 = new JLabel("First Operand:");
+		JLabel lbl2 = new JLabel("Second Operand:");
+		JLabel lbl3 = new JLabel("Result:");
+		
+		firstValueTxt = new JTextField();
+		secondValueTxt = new JTextField();
+		resultTxt = new JTextField();
+		
+		//add them to the Grid in the correct order
+		topPnl.add(lbl1);
+		topPnl.add(firstValueTxt);
+		topPnl.add(lbl2);
+		topPnl.add(secondValueTxt);
+		topPnl.add(lbl3);
+		topPnl.add(resultTxt);
+		
+		//need to register some nannies for the buttons
+		ButtonHandler nanny = new ButtonHandler();
+		addBtn.addActionListener(nanny);
+		subtractBtn.addActionListener(nanny);
+		multiplyBtn.addActionListener(nanny);
+		divideBtn.addActionListener(nanny);
+		modBtn.addActionListener(nanny);
+		clearBtn.addActionListener(nanny);
+		
+		//pack the components into the smallest window possible
+		//this.pack();
+		
+		//LAST LINE!
+		this.setVisible(true);
+	}//end constructor
+	
+	//INNER CLASS GOES HERE
+	private class ButtonHandler implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent ev)
+		{
+			// Step 1: read the data from the two text fields and store
+			String firstOperandString = firstValueTxt.getText();
+			String secondOperandString = secondValueTxt.getText();
+		
+			//parse them to double values
+			double firstOperand = Double.parseDouble(firstOperandString);
+			double secondOperand = Double.parseDouble(secondOperandString);
+			double result = 0;
+			
+			//step 2: figure out which button got pressed using an if-else-if
+			// Use the ev.getSource() method for this one.
+			if(ev.getSource().equals(addBtn) )
+			{
+				result = firstOperand + secondOperand;
+				//write it back to the resultTxt
+				resultTxt.setText("" + result);
+			}
+			else if(ev.getSource().equals(subtractBtn) )
+			{
+				result = firstOperand - secondOperand;
+				//write it back to the resultTxt
+				resultTxt.setText("" + result);
+			}
+			else if(ev.getSource().equals(multiplyBtn) )
+			{
+				result = firstOperand * secondOperand;
+				//write it back to the resultTxt
+				resultTxt.setText("" + result);
+			}
+			else if(ev.getSource().equals(divideBtn) )
+			{
+				result = firstOperand / secondOperand;
+				//write it back to the resultTxt
+				resultTxt.setText("" + result);
+			}
+			else if(ev.getSource().equals(modBtn) )
+			{
+				result = firstOperand % secondOperand;
+				//write it back to the resultTxt
+				resultTxt.setText("" + result);
+			}
+			else if(ev.getSource().equals(clearBtn))
+			{
+				firstValueTxt.setText("");
+				secondValueTxt.setText("");
+				resultTxt.setText("");
+			}
+	
+		}//end method actionPerformed()
+	
+	}//end inner class	
+}//end class
